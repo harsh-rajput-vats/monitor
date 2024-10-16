@@ -8,8 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
 
     steps:
     - name: Checkout code
@@ -20,20 +18,13 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    # - name: Install Docker
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get install -y docker.io
-    #     sudo systemctl start docker
-    #     sudo systemctl enable docker
-
-    - name: Install Docker Compose
-      run: |
-        sudo apt-get install docker-compose -y
-
     - name: Copy files to Droplet
       run: |
-        scp -r ./* root@137.184.127.9:/gpl_monitoring
+        scp -o StrictHostKeyChecking=no -r ./* root@137.184.127.9:/gpl_monitoring
+
+    - name: Debug SSH Connection
+      run: |
+        ssh -v root@137.184.127.9
 
     - name: Deploy on Droplet
       run: |
