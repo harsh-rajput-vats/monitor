@@ -28,4 +28,5 @@ jobs:
 
     - name: Deploy on Droplet
       run: |
-        ssh root@137.184.127.9 'cd /gpl_monitoring && docker-compose up --build -d'
+        ssh root@137.184.127.9 'cd /gpl_monitoring && docker-compose up --build -d && docker system prune --volumes
+'
