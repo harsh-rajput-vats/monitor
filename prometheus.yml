@@ -13,4 +13,4 @@ scrape_configs:
   # Scrape application metrics
   - job_name: "ytpgo"
     static_configs:
-      - targets: ['http://13.201.172.96:2112']
+      - targets: ['15.206.212.52:2112']
